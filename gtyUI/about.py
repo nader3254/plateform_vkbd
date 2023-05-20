@@ -448,6 +448,15 @@ class About(QDialog, ui_about.Ui_AboutDialog):
 		self.eth0_val.setText(aboutTools.getEth0())
 		self.eth1_val.setText(aboutTools.getEth1())
 		self.wlan_val.setText(aboutTools.getWlan0())
+		self.sys_val.setText(aboutTools.getDHT22())
+		self.tcpu_val.setText(aboutTools.getCpuTemp())
+		self.gpu_val.setText(aboutTools.getGpuTemp())
+		self.bbattery_val.setText("16.77v")
+		self.mbattery_val.setText("14.64v")
+		self.cbattery_Val.setText("15v")
+		self.sbattery_val.setText("5.47v")
+
+  
 
   
      

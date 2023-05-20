@@ -1,7 +1,7 @@
 import datetime
 import psutil
 import subprocess
-#import Adafruit_DHT as dht
+import Adafruit_DHT as dht
 
 
 #print("Current date and time:", formatted_datetime)
@@ -36,8 +36,8 @@ def getEth0():
     maccmd="ifconfig eth0 | awk '/ether / {print $2}'"
     output1 = subprocess.check_output(ipcmd,  shell=True)
     output2 = subprocess.check_output(maccmd, shell=True)
-    #return "IP "+str(output1.decode()).replace("\n","")+" MAC "+str(output2.decode())
-    return "IP "+"192.168.162.150".replace("\n","")+" MAC "+"f6:aa:95:47:69:77"
+    return "IP "+str(output1.decode()).replace("\n","")+" MAC "+str(output2.decode())
+    #return "IP "+"192.168.162.150".replace("\n","")+" MAC "+"f6:aa:95:47:69:77"
 
 def getEth1():
     # Get network interfaces
@@ -45,8 +45,8 @@ def getEth1():
     maccmd="ifconfig eth1 | awk '/ether / {print $2}'"
     output1 = subprocess.check_output(ipcmd,  shell=True)
     output2 = subprocess.check_output(maccmd, shell=True)
-    #return "IP "+str(output1.decode()).replace("\n","")+" MAC "+str(output2.decode())
-    return "IP:"+"192.168.162.70".replace("\n","")+" MAC:"+"f6:ea:95:75:69:46"
+    return "IP "+str(output1.decode()).replace("\n","")+" MAC "+str(output2.decode())
+    #return "IP:"+"192.168.162.70".replace("\n","")+" MAC:"+"f6:ea:95:75:69:46"
 
 
 def getWlan0():
@@ -55,8 +55,8 @@ def getWlan0():
     maccmd="ifconfig wlan0 | awk '/ether / {print $2}'"
     output1 = subprocess.check_output(ipcmd,  shell=True)
     output2 = subprocess.check_output(maccmd, shell=True)
-    #return "IP "+str(output1.decode()).replace("\n","")+" MAC "+str(output2.decode())
-    return "IP:"+"192.168.162.76".replace("\n","")+" MAC:"+"f6:ff:ff:75:69:46"
+    return "IP "+str(output1.decode()).replace("\n","")+" MAC "+str(output2.decode())
+    #return "IP:"+"192.168.162.76".replace("\n","")+" MAC:"+"f6:ff:ff:75:69:46"
 
 def getCpuTemp():
     temperatures = psutil.sensors_temperatures()
@@ -66,12 +66,23 @@ def getCpuTemp():
     else:
         return "Temp information not available."
 
+
+def getCpuTemp():
+    cmd="vcgencmd  measure_temp | grep -o -E '[[:digit:]].*'"
+    output = subprocess.check_output(cmd,  shell=True)
+    return str(output.decode()).replace("\n","")
+
+def getGpuTemp():
+    cmd="vcgencmd  measure_temp | grep -o -E '[[:digit:]].*'"
+    output = subprocess.check_output(cmd,  shell=True)
+    return str(output.decode()).replace("\n","")
+
 def getDHT22():
     pinval=4
-    #h,t=dht.read_retry(dht.DHT22,pinval)
-    t=26.565668
-    h=94    
-    return 'Temp={0:0.1f}°C and Humidity={1:0.1f}%'.format(t,h)
+    h,t=dht.read_retry(dht.DHT22,pinval)
+    #t=26.565668
+    #h=94    
+    return '{0:0.1f}°C         {1:0.1f}%'.format(t,h)
  
 def getMBattery():
     # Get network interfaces
