@@ -436,7 +436,7 @@ class About(QDialog, ui_about.Ui_AboutDialog):
   
   
 
-  
+		self.bat=aboutTools.battery()
 		# starting our timer
 		self.long_press_timer.start(300)  
   
@@ -451,10 +451,10 @@ class About(QDialog, ui_about.Ui_AboutDialog):
 		self.sys_val.setText(aboutTools.getDHT22())
 		self.tcpu_val.setText(aboutTools.getCpuTemp())
 		self.gpu_val.setText(aboutTools.getGpuTemp())
-		self.bbattery_val.setText("16.77v")
-		self.mbattery_val.setText("14.64v")
-		self.cbattery_Val.setText("15v")
-		self.sbattery_val.setText("5.47v")
+		self.bbattery_val.setText(self.bat.getBackupB_v())
+		self.mbattery_val.setText(self.bat.getMainB_v())
+		self.cbattery_Val.setText(self.bat.getCharging_v())
+		self.sbattery_val.setText(self.bat.getvPcb_v())
 
   
 

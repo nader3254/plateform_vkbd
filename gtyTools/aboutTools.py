@@ -1,3 +1,19 @@
+# Description : This script will monitor the battery voltage and battery level
+# Author : Nader Hany
+
+# according to the given data 
+# Vmin = 4*2.75 v
+# Vmax = 4*4.2  v
+# according to the voltage divider has r1=68k ,r2=10k Vads=Vbattery*(r2/r1+r2) 
+# so we calculate Vbattery = 7.8125 * Vads
+# Battery level = ((Vbattery - 11) * 17.242)
+ 
+
+import time
+import board
+import busio
+import adafruit_ads1x15.ads1115 as ADS
+from   adafruit_ads1x15.analog_in import AnalogIn
 import datetime
 import psutil
 import subprocess
@@ -5,6 +21,50 @@ import Adafruit_DHT as dht
 
 
 #print("Current date and time:", formatted_datetime)
+
+class battery:
+    def __init__(self):
+        self.i2c = busio.I2C(board.SCL, board.SDA)
+        self.ads = ADS.ADS1115(self.i2c)
+        self.adc0 = AnalogIn(self.ads, ADS.P0)
+        self.adc1 = AnalogIn(self.ads, ADS.P1)
+        self.adc2 = AnalogIn(self.ads, ADS.P2)
+        self.adc3 = AnalogIn(self.ads, ADS.P3)
+    
+    # main battery voltage     
+    def getMainB_v(self):
+            # VIN_M
+        VOUT=7.8125*self.adc2.voltage
+        #BLEVEL=(VOUT-11)*17.242
+        return str(VOUT)+"v"   
+    
+    # main battery level     
+    def getLMainB_l(self):
+            # VIN_M
+        VOUT=7.8125*self.adc2.voltage
+        BLEVEL=(VOUT-11)*17.242
+        return '{0:0.1f}% '.format(BLEVEL)  
+    
+    # backup battery voltage     
+    def getBackupB_v(self):
+        VBKB=self.adc1.voltage*5.3   
+        return str(VBKB)+"v"   
+    
+
+    # charging voltage     
+    def getCharging_v(self):
+        # VIN_USB
+        VUSB=self.adc0.voltage*5.3
+        return str(VUSB)+"v"   
+    
+    
+    # pcb  voltage     
+    def getvPcb_v(self):
+        # VIN_PCB
+        VPCB=self.adc3.voltage*1.65
+        return str(VPCB)+"v"   
+
+
 
 def getDateTime():
     current_datetime = datetime.datetime.now()
