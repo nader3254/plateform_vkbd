@@ -33,7 +33,7 @@ class battery:
     
     # main battery voltage     
     def getMainB_v(self):
-            # VIN_M
+        # VIN_M
         VOUT=7.8125*self.adc2.voltage
         #BLEVEL=(VOUT-11)*17.242
         return "{:.2f}v".format(VOUT)  

@@ -253,7 +253,7 @@ class About(QDialog, ui_about.Ui_AboutDialog):
 
         # Battery_main
 		self.mbattery_val = QLabel(self)
-		self.mbattery_val.setText("Main Battery ")
+		self.mbattery_val.setText("Battery ")
 		self.mbattery_val.setObjectName("label")
 		self.mbattery_val.setGeometry(QRect(3, 35*9-5, 110, 35))
 		self.mbattery_val.setFont(font)
@@ -264,7 +264,7 @@ class About(QDialog, ui_about.Ui_AboutDialog):
   
       	# Battery_backup
 		self.bbattery_header = QLabel(self)
-		self.bbattery_header.setText("Backup Battery ")
+		self.bbattery_header.setText("Backup  ")
 		self.bbattery_header.setObjectName("label")
 		self.bbattery_header.setGeometry(QRect(200, 35*9-5, 120, 35))
 		self.bbattery_header.setFont(font)
@@ -274,7 +274,7 @@ class About(QDialog, ui_about.Ui_AboutDialog):
   
       	# Battery_charge
 		self.cbattery_header = QLabel(self)
-		self.cbattery_header.setText("Charge ")
+		self.cbattery_header.setText("Charger ")
 		self.cbattery_header.setObjectName("label")
 		self.cbattery_header.setGeometry(QRect(3, 35*10-12, 105, 35))
 		self.cbattery_header.setFont(font)
@@ -346,7 +346,7 @@ class About(QDialog, ui_about.Ui_AboutDialog):
 		self.eth1_val = QLabel(self)
 		self.eth1_val.setText("eth1 ")
 		self.eth1_val.setObjectName("label")
-		self.eth1_val.setGeometry(QRect(5+100, 35*4+2, 250, 35))
+		self.eth1_val.setGeometry(QRect(value_start_x+4, 35*4+2, 250, 35))
 		self.eth1_val.setFont(font)
 		self.eth1_val.setStyleSheet(
 			"background-color: rgb(32, 30, 41);\n" "color: rgb(209, 101, 53);"
@@ -435,8 +435,11 @@ class About(QDialog, ui_about.Ui_AboutDialog):
 		)
   
   
-
-		self.bat=aboutTools.battery()
+		try:
+			self.bat=aboutTools.battery()
+		except:
+			print("battery already initialized...\n")
+   
 		# starting our timer
 		self.long_press_timer.start(300)  
   
@@ -454,9 +457,9 @@ class About(QDialog, ui_about.Ui_AboutDialog):
 		self.bbattery_val.setText(self.bat.getBackupB_v())
 		self.mbattery_val.setText(self.bat.getMainB_v())
 		self.cbattery_Val.setText(self.bat.getCharging_v())
-		self.sbattery_val.setText(self.bat.getvPcb_v())
+		self.sbattery_val.setText(self.bat.getvPcb_v()) 
 
-  
+ 
 
   
      
