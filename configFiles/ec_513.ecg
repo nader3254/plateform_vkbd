@@ -1,0 +1,20 @@
+# 比赛配置文件
+# 赛事信息
+[event]
+eventName=Maraton Vransko Jezero 2023
+eventId=513
+# 设备信息
+[U000]
+timingPoint=151
+machinePosition=Start|151
+prio=0
+minTime=0 
+outputFileName=Q510_512_record.csv 
+readerPower=30 
+tagCheckFileName= 
+tagCheckFontSize=20 
+tagCheckFontColor=blue 
+softwareVersion=1.0 
+firmwareVersion=1.0 
+linuxDaemonVersion=1 
+machine_configcol= 
