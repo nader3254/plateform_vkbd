@@ -36,11 +36,11 @@ class battery:
             # VIN_M
         VOUT=7.8125*self.adc2.voltage
         #BLEVEL=(VOUT-11)*17.242
-        return str(VOUT)+"v"   
+        return "{:.2f}v".format(VOUT)  
     
     # main battery level     
     def getLMainB_l(self):
-            # VIN_M
+        # VIN_M
         VOUT=7.8125*self.adc2.voltage
         BLEVEL=(VOUT-11)*17.242
         return '{0:0.1f}% '.format(BLEVEL)  
@@ -48,21 +48,21 @@ class battery:
     # backup battery voltage     
     def getBackupB_v(self):
         VBKB=self.adc1.voltage*5.3   
-        return str(VBKB)+"v"   
+        return  "{:.2f}v".format(VBKB)  
     
 
     # charging voltage     
     def getCharging_v(self):
         # VIN_USB
         VUSB=self.adc0.voltage*5.3
-        return str(VUSB)+"v"   
+        return "{:.2f}v".format(VUSB)   
     
     
     # pcb  voltage     
     def getvPcb_v(self):
         # VIN_PCB
         VPCB=self.adc3.voltage*1.65
-        return str(VPCB)+"v"   
+        return "{:.2f}v".format(VPCB)  
 
 
 
